@@ -43,7 +43,7 @@ for (let i=0; i<13; i++) {
     let key = document.createElement('div');
     key.className = 'keys';
     if (i==0) {key.className = 'keys caps-lock__key'}
-    if (i==14) {key.className = 'keys enter__key'}
+    if (i==12) {key.className = 'keys enter__key'}
     key.textContent = data.eng.row3[i];
     keysRows[2].append(key);
 }
@@ -51,7 +51,7 @@ for (let i=0; i<13; i++) {
 for (let i=0; i<14; i++) {
     let key = document.createElement('div');
     key.className = 'keys';
-    if (i==0) {key.className = 'keys shift__key'}
+    if (i==0) {key.className = 'keys shift__key shift__key-left'}
     key.textContent = data.eng.row4[i];
     keysRows[3].append(key);
 }
@@ -59,9 +59,9 @@ for (let i=0; i<14; i++) {
 for (let i=0; i<9; i++) {
     let key = document.createElement('div');
     key.className = 'keys';
-    if (i==0) {key.className = 'keys ctrl__key'}
+    if (i==0) {key.className = 'keys ctrl__key ctrl__key-left'}
     if (i==3) {key.className = 'keys space__key'}
-    if (i==5) {key.className = 'keys ctrl__key'}
+    if (i==5) {key.className = 'keys ctrl__key ctrl__key-right'}
     key.textContent = data.eng.row5[i];
     keysRows[4].append(key);
 }
