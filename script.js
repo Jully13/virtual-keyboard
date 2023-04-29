@@ -6,6 +6,13 @@ let wrapper = document.createElement('div');
 wrapper.className = 'wrapper';
 body.append(wrapper);
 
+let inputForm = document.createElement('form');
+wrapper.append(inputForm);
+
+let inputText = document.createElement('input');
+inputText.className = 'text';
+inputForm.append(inputText);
+
 let keyBoardWrapper = document.createElement('div');
 keyBoardWrapper.className = 'keyboard__weapper';
 wrapper.append(keyBoardWrapper);
