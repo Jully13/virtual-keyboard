@@ -9,7 +9,8 @@ body.append(wrapper);
 let inputForm = document.createElement('form');
 wrapper.append(inputForm);
 
-let inputText = document.createElement('input');
+let inputText = document.createElement('textarea');
+inputText.setAttribute("type", "text");
 inputText.className = 'text';
 inputForm.append(inputText);
 
