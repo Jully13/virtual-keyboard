@@ -63,7 +63,7 @@ body {
 }
 
 .text {
-  width: 900px;
+  width: 1050px;
   height: 150px;
   font-size: 20px;
   background-color: #f7f7f7;
@@ -79,3 +79,17 @@ body {
   color: #fff;
 }
 
+.keys.remove {
+  animation: keys_animation 0.5s forwards;
+}
+
+@keyframes keys_animation {
+  0% {
+    background-color: #02404d;
+    color: #fff;
+  }
+  100% {
+    background-color:  #fff;
+    color: #000;
+  }
+}
