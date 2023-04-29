@@ -25,7 +25,7 @@ let keysRows = document.querySelectorAll('.row');
 for (let i=0; i<14; i++) {
     let key = document.createElement('div');
     key.className = 'keys';
-    key[13].classList.add('backspace-key');
+    if (i==13) {key.className = 'keys backspace__key'}
     key.textContent = data.eng.row1[i];
     keysRows[0].append(key);
 }
@@ -33,8 +33,8 @@ for (let i=0; i<14; i++) {
 for (let i=0; i<15; i++) {
     let key = document.createElement('div');
     key.className = 'keys';
-    key[0].classList.add('tab-key');
-    key[14].classList.add('del-key');
+    if (i==0) {key.className = 'keys tab__key'}
+    if (i==14) {key.className = 'keys del__key'}
     key.textContent = data.eng.row2[i];
     keysRows[1].append(key);
 }
@@ -42,8 +42,8 @@ for (let i=0; i<15; i++) {
 for (let i=0; i<13; i++) {
     let key = document.createElement('div');
     key.className = 'keys';
-    key[0].classList.add('caps-lock-key');
-    key[12].classList.add('enter-key');
+    if (i==0) {key.className = 'keys caps-lock__key'}
+    if (i==14) {key.className = 'keys enter__key'}
     key.textContent = data.eng.row3[i];
     keysRows[2].append(key);
 }
@@ -51,7 +51,7 @@ for (let i=0; i<13; i++) {
 for (let i=0; i<14; i++) {
     let key = document.createElement('div');
     key.className = 'keys';
-    key[0].classList.add('shift-key');
+    if (i==0) {key.className = 'keys shift__key'}
     key.textContent = data.eng.row4[i];
     keysRows[3].append(key);
 }
@@ -59,9 +59,9 @@ for (let i=0; i<14; i++) {
 for (let i=0; i<9; i++) {
     let key = document.createElement('div');
     key.className = 'keys';
-    key[0].classList.add('ctrl-key');
-    key[3].classList.add('space-key');
-    key[5].classList.add('ctrl-key');
+    if (i==0) {key.className = 'keys ctrl__key'}
+    if (i==3) {key.className = 'keys space__key'}
+    if (i==5) {key.className = 'keys ctrl__key'}
     key.textContent = data.eng.row5[i];
     keysRows[4].append(key);
 }
