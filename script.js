@@ -182,4 +182,28 @@ window.addEventListener('keyup', function(event) {
 })
 
 
+keys.forEach(key => {
+    key.addEventListener('mousedown', function () {
+        if (key.classList.contains('caps-lock__key')) {
+            key.classList.toggle('active');
+        } else {key.classList.add('active');}
+    })
+
+})
+
+keys.forEach(key => {
+    key.addEventListener('mouseup', function () {
+            key.classList.remove('active');
+            key.classList.add('remove');
+            setTimeout(()=> {
+                key.classList.remove('remove');
+            },200);
+    })
+})
+
+
+
+
+
+
 //console.log(spaceKey);
