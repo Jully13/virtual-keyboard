@@ -18,6 +18,10 @@ body {
   margin: 0, 10px;
 }
 
+.language__wrapper {
+  margin: 0 0 60px 0;
+}
+
 .keyboard__weapper {
   width: 100%;
   max-width: 1050px;
