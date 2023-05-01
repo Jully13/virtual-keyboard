@@ -60,70 +60,78 @@ function getLocalStorage() {
 }
 
 selectLang.addEventListener ('change', () => {
-    location.reload()
+    getKeys ();
+    text.focus();
+    getCharFromVirtualKeyboard ();
+    getCharFromKeyboard ();
 })
 
+getKeys ();
 
+function getKeys () {
+    document.querySelector('.keyboard__keys').innerHTML = '';
+    for (let i=0; i<5; i++) {
+        let row = document.createElement('div');
+        row.className = 'row';
+        keyBoardKeys.append(row);
+    }
 
-for (let i=0; i<5; i++) {
-    let row = document.createElement('div');
-    row.className = 'row';
-    keyBoardKeys.append(row);
+    let keysRows = document.querySelectorAll('.row');
+
+    for (let i=0; i<14; i++) {
+        let key = document.createElement('div');
+        key.className = 'keys';
+        if (i==13) {key.className = 'keys backspace__key'}
+        key.textContent = data[selectLang.value].row1[i];
+        keysRows[0].append(key);
+    }
+
+    for (let i=0; i<15; i++) {
+        let key = document.createElement('div');
+        key.className = 'keys';
+        if (i==0) {key.className = 'keys tab__key'}
+        if (i==14) {key.className = 'keys del__key'}
+        key.textContent = data[selectLang.value].row2[i];
+        keysRows[1].append(key);
+    }
+
+    for (let i=0; i<13; i++) {
+        let key = document.createElement('div');
+        key.className = 'keys';
+        if (i==0) {key.className = 'keys caps-lock__key'}
+        if (i==12) {key.className = 'keys enter__key'}
+        key.textContent = data[selectLang.value].row3[i];
+        keysRows[2].append(key);
+    }
+
+    for (let i=0; i<14; i++) {
+        let key = document.createElement('div');
+        key.className = 'keys';
+        if (i==0) {key.className = 'keys shift__key shift__key-left'}
+        if (i==12) {key.className = 'keys array__key array__key-up'}
+        if (i==13) {key.className = 'keys shift__key shift__key-right'}
+        key.textContent = data[selectLang.value].row4[i];
+        keysRows[3].append(key);
+    }
+
+    for (let i=0; i<9; i++) {
+        let key = document.createElement('div');
+        key.className = 'keys';
+        if (i==0) {key.className = 'keys ctrl__key ctrl__key-left'}
+        if (i==1) {key.className = 'keys win__key'}
+        if (i==2) {key.className = 'keys alt__key alt__key-left'}
+        if (i==3) {key.className = 'keys space__key'}
+        if (i==4) {key.className = 'keys alt__key alt__key-right'}
+        if (i==5) {key.className = 'keys ctrl__key ctrl__key-right'}
+        if (i==6) {key.className = 'keys array__key array__key-left'}
+        if (i==7) {key.className = 'keys array__key array__key-down'}
+        if (i==8) {key.className = 'keys array__key array__key-right'}
+        key.textContent = data[selectLang.value].row5[i];
+        keysRows[4].append(key);
+    }
 }
 
-let keysRows = document.querySelectorAll('.row');
 
-for (let i=0; i<14; i++) {
-    let key = document.createElement('div');
-    key.className = 'keys';
-    if (i==13) {key.className = 'keys backspace__key'}
-    key.textContent = data[selectLang.value].row1[i];
-    keysRows[0].append(key);
-}
-
-for (let i=0; i<15; i++) {
-    let key = document.createElement('div');
-    key.className = 'keys';
-    if (i==0) {key.className = 'keys tab__key'}
-    if (i==14) {key.className = 'keys del__key'}
-    key.textContent = data[selectLang.value].row2[i];
-    keysRows[1].append(key);
-}
-
-for (let i=0; i<13; i++) {
-    let key = document.createElement('div');
-    key.className = 'keys';
-    if (i==0) {key.className = 'keys caps-lock__key'}
-    if (i==12) {key.className = 'keys enter__key'}
-    key.textContent = data[selectLang.value].row3[i];
-    keysRows[2].append(key);
-}
-
-for (let i=0; i<14; i++) {
-    let key = document.createElement('div');
-    key.className = 'keys';
-    if (i==0) {key.className = 'keys shift__key shift__key-left'}
-    if (i==12) {key.className = 'keys array__key array__key-up'}
-    if (i==13) {key.className = 'keys shift__key shift__key-right'}
-    key.textContent = data[selectLang.value].row4[i];
-    keysRows[3].append(key);
-}
-
-for (let i=0; i<9; i++) {
-    let key = document.createElement('div');
-    key.className = 'keys';
-    if (i==0) {key.className = 'keys ctrl__key ctrl__key-left'}
-    if (i==1) {key.className = 'keys win__key'}
-    if (i==2) {key.className = 'keys alt__key alt__key-left'}
-    if (i==3) {key.className = 'keys space__key'}
-    if (i==4) {key.className = 'keys alt__key alt__key-right'}
-    if (i==5) {key.className = 'keys ctrl__key ctrl__key-right'}
-    if (i==6) {key.className = 'keys array__key array__key-left'}
-    if (i==7) {key.className = 'keys array__key array__key-down'}
-    if (i==8) {key.className = 'keys array__key array__key-right'}
-    key.textContent = data[selectLang.value].row5[i];
-    keysRows[4].append(key);
-}
 
 
 let keys = document.querySelectorAll('.keys');
@@ -151,126 +159,135 @@ for (let i=0; i<keys.length; i++) {
     keys[i].setAttribute("lowerCaseName", keys[i].innerText.toLowerCase());
 }
 
-window.addEventListener('keydown', function (event) {
-    for (let i=0; i<keys.length; i++) {
-        if (event.key == keys[i].getAttribute('keyname') || event.key == keys[i].getAttribute('lowerCaseName')) {
-            keys[i].classList.add('active');
-        }
-        if (event.code == 'Space') {
-            spaceKey.classList.add('active');
-        }
-        if (event.code == "ShiftLeft") {
-            shiftKeyRight.classList.remove('active');
-        }
-        if (event.code == "ShiftRight") {
-            shiftKeyLeft.classList.remove('active');
-        }
-        if (event.code == "AltLeft") {
-            altKeyRight.classList.remove('active');
-        }
-        if (event.code == "AltRight") {
-            altKeyLeft.classList.remove('active');
-        }
-        if (event.code == "CtrlLeft") {
-            ctrlKeyRight.classList.remove('active');
-        }
-        if (event.code == "CtrlRight") {
-            ctrlKeyLeft.classList.remove('active');
-        }
-        if (event.code == 'CapsLock') {
-            capsLockKey.classList.toggle('active');
-        }
-    }
-})
 
-window.addEventListener('keyup', function(event) {
-    for (let i=0; i<keys.length; i++) {
-        if (event.key == keys[i].getAttribute('keyname') || event.key == keys[i].getAttribute('lowerCaseName')) {
-            keys[i].classList.remove('active');
-            keys[i].classList.add('remove');
-        }
-        if (event.code == 'Space') {
-            spaceKey.classList.remove('active');
-            spaceKey.classList.add('remove');
-        }
-        if (event.code == 'ShiftLeft') {
-            shiftKeyRight.classList.remove('active');
-            shiftKeyRight.classList.remove('remove');
-        }
-        if(event.code == 'ShiftRight') {
-            shiftKeyLeft.classList.remove('active');
-            shiftKeyLeft.classList.remove('remove');
-        }
-        if (event.code == 'AltLeft') {
-            altKeyRight.classList.remove('active');
-            altKeyRight.classList.remove('remove');
-        }
-        if(event.code == 'AltRight') {
-            altKeyLeft.classList.remove('active');
-            altKeyLeft.classList.remove('remove');
-        }
-        if (event.code == 'CtrlLeft') {
-            ctrlKeyRight.classList.remove('active');
-            ctrlKeyRight.classList.remove('remove');
-        }
-        if(event.code == 'CtrlRight') {
-            ctrlKeyLeft.classList.remove('active');
-            ctrlKeyLeft.classList.remove('remove');
-        }
-        setTimeout(()=> {
-            keys[i].classList.remove('remove');
-        },200);
-    }
-})
+getCharFromKeyboard ();
 
-
-keys.forEach(key => {
-    key.addEventListener('mousedown', function () {
-        key.classList.add('active');
+function getCharFromKeyboard () {
+    window.addEventListener('keydown', function (event) {
+        for (let i=0; i<keys.length; i++) {
+            if (event.key == keys[i].getAttribute('keyname') || event.key == keys[i].getAttribute('lowerCaseName')) {
+                keys[i].classList.add('active');
+            }
+            if (event.code == 'Space') {
+                spaceKey.classList.add('active');
+            }
+            if (event.code == "ShiftLeft") {
+                shiftKeyRight.classList.remove('active');
+            }
+            if (event.code == "ShiftRight") {
+                shiftKeyLeft.classList.remove('active');
+            }
+            if (event.code == "AltLeft") {
+                altKeyRight.classList.remove('active');
+            }
+            if (event.code == "AltRight") {
+                altKeyLeft.classList.remove('active');
+            }
+            if (event.code == "CtrlLeft") {
+                ctrlKeyRight.classList.remove('active');
+            }
+            if (event.code == "CtrlRight") {
+                ctrlKeyLeft.classList.remove('active');
+            }
+            if (event.code == 'CapsLock') {
+                capsLockKey.classList.toggle('active');
+            }
+        }
     })
-    key.addEventListener('mouseup', function (event) {
-        key.classList.remove('active');
-        key.classList.add('remove');
-        setTimeout(()=> {
-            key.classList.remove('remove');
-        },200);
-        writeCharInTextBox (key);
+
+    window.addEventListener('keyup', function(event) {
+        for (let i=0; i<keys.length; i++) {
+            if (event.key == keys[i].getAttribute('keyname') || event.key == keys[i].getAttribute('lowerCaseName')) {
+                keys[i].classList.remove('active');
+                keys[i].classList.add('remove');
+            }
+            if (event.code == 'Space') {
+                spaceKey.classList.remove('active');
+                spaceKey.classList.add('remove');
+            }
+            if (event.code == 'ShiftLeft') {
+                shiftKeyRight.classList.remove('active');
+                shiftKeyRight.classList.remove('remove');
+            }
+            if(event.code == 'ShiftRight') {
+                shiftKeyLeft.classList.remove('active');
+                shiftKeyLeft.classList.remove('remove');
+            }
+            if (event.code == 'AltLeft') {
+                altKeyRight.classList.remove('active');
+                altKeyRight.classList.remove('remove');
+            }
+            if(event.code == 'AltRight') {
+                altKeyLeft.classList.remove('active');
+                altKeyLeft.classList.remove('remove');
+            }
+            if (event.code == 'CtrlLeft') {
+                ctrlKeyRight.classList.remove('active');
+                ctrlKeyRight.classList.remove('remove');
+            }
+            if(event.code == 'CtrlRight') {
+                ctrlKeyLeft.classList.remove('active');
+                ctrlKeyLeft.classList.remove('remove');
+            }
+            setTimeout(()=> {
+                keys[i].classList.remove('remove');
+            },200);
+        }
     })
-})
-
-function writeCharInTextBox (key) {
-    if (key.getAttribute('keyName') == 'Caps Lock') {
-        capsLockKey.addEventListener('click', () => {
-            text.textContent = text.textContent;
-            capsLockKey.classList.toggle('upper');
-        })
-    } else
-    if (key.getAttribute('keyName') == 'Backspace') {
-        text.textContent = (text.textContent).substring(0, (text.textContent).length-1)
-    } else
-    if (key.getAttribute('keyName') == 'Tab') {
-        text.textContent += String.fromCharCode(9);
-    } else
-     if (key.getAttribute('keyName') == 'ENTER') {
-        text.textContent += String.fromCharCode(13);
-    } else
-    if (key.classList.contains('space__key')) {
-        text.textContent += String.fromCharCode(32);
-    } else
-    if (key.getAttribute('keyName') == 'Win') {
-        winKey.addEventListener('click', (event) => {
-            event.code = 91;
-        })
-    } else
-    if (key.getAttribute('keyName') == 'DEL') {
-       text.textContent = (text.textContent).substring(0, (text.textContent).length-1)
-    } else {
-        if (capsLockKey.classList.contains('upper')) {
-            text.textContent += key.getAttribute('keyname');
-        } else {text.textContent += key.getAttribute('lowerCaseName');}
-
-    }
 }
+
+getCharFromVirtualKeyboard ();
+
+function getCharFromVirtualKeyboard () {
+    keys.forEach(key => {
+        key.addEventListener('mousedown', function () {
+            key.classList.add('active');
+        })
+        key.addEventListener('mouseup', function (event) {
+            key.classList.remove('active');
+            key.classList.add('remove');
+            setTimeout(()=> {
+                key.classList.remove('remove');
+            },200);
+            writeCharInTextBox (key);
+        })
+    })
+
+    function writeCharInTextBox (key) {
+        if (key.getAttribute('keyName') == 'Caps Lock') {
+            text.textContent = text.textContent;
+        } else
+        if (key.getAttribute('keyName') == 'Backspace') {
+            text.textContent = (text.textContent).substring(0, (text.textContent).length-1)
+        } else
+        if (key.getAttribute('keyName') == 'Tab') {
+            text.textContent += String.fromCharCode(9);
+        } else
+         if (key.getAttribute('keyName') == 'ENTER') {
+            text.textContent += String.fromCharCode(13);
+        } else
+        if (key.classList.contains('space__key')) {
+            text.textContent += String.fromCharCode(32);
+        } else
+        if (key.getAttribute('keyName') == 'Win') {
+            winKey.addEventListener('click', (event) => {
+                event.code = 91;
+            })
+        } else
+        if (key.getAttribute('keyName') == 'DEL') {
+           text.textContent = (text.textContent).substring(0, (text.textContent).length-1)
+        } else {
+            if (capsLockKey.classList.contains('upper')) {
+                text.textContent += key.getAttribute('keyname');
+            } else {text.textContent += key.getAttribute('lowerCaseName');}
+        }
+    }
+    capsLockKey.addEventListener('click', () => {
+        capsLockKey.classList.toggle('upper');
+    })
+}
+
+
 
 
 
