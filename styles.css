@@ -99,3 +99,7 @@ body {
     color: #000;
   }
 }
+
+.upper {
+  text-transform: uppercase;
+}

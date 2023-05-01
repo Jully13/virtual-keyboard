@@ -38,6 +38,33 @@ let keyBoardKeys = document.createElement('div');
 keyBoardKeys.className = 'keyboard__keys';
 keyBoardWrapper.append(keyBoardKeys);
 
+
+// Local Storage
+
+window.addEventListener('beforeunload', setLocalStorage);
+getLocalStorage();
+
+function setLocalStorage() {
+  localStorage.setItem('language', selectLang.value);
+  localStorage.setItem('text', text.value);
+}
+
+
+function getLocalStorage() {
+  if (localStorage.getItem('language')) {
+    selectLang.value = localStorage.getItem('language');
+  }
+  if (localStorage.getItem('text')) {
+    text.value = localStorage.getItem('text');
+  }
+}
+
+selectLang.addEventListener ('change', () => {
+    location.reload()
+})
+
+
+
 for (let i=0; i<5; i++) {
     let row = document.createElement('div');
     row.className = 'row';
@@ -50,7 +77,7 @@ for (let i=0; i<14; i++) {
     let key = document.createElement('div');
     key.className = 'keys';
     if (i==13) {key.className = 'keys backspace__key'}
-    key.textContent = data.eng.row1[i];
+    key.textContent = data[selectLang.value].row1[i];
     keysRows[0].append(key);
 }
 
@@ -59,7 +86,7 @@ for (let i=0; i<15; i++) {
     key.className = 'keys';
     if (i==0) {key.className = 'keys tab__key'}
     if (i==14) {key.className = 'keys del__key'}
-    key.textContent = data.eng.row2[i];
+    key.textContent = data[selectLang.value].row2[i];
     keysRows[1].append(key);
 }
 
@@ -68,7 +95,7 @@ for (let i=0; i<13; i++) {
     key.className = 'keys';
     if (i==0) {key.className = 'keys caps-lock__key'}
     if (i==12) {key.className = 'keys enter__key'}
-    key.textContent = data.eng.row3[i];
+    key.textContent = data[selectLang.value].row3[i];
     keysRows[2].append(key);
 }
 
@@ -78,7 +105,7 @@ for (let i=0; i<14; i++) {
     if (i==0) {key.className = 'keys shift__key shift__key-left'}
     if (i==12) {key.className = 'keys array__key array__key-up'}
     if (i==13) {key.className = 'keys shift__key shift__key-right'}
-    key.textContent = data.eng.row4[i];
+    key.textContent = data[selectLang.value].row4[i];
     keysRows[3].append(key);
 }
 
@@ -94,7 +121,7 @@ for (let i=0; i<9; i++) {
     if (i==6) {key.className = 'keys array__key array__key-left'}
     if (i==7) {key.className = 'keys array__key array__key-down'}
     if (i==8) {key.className = 'keys array__key array__key-right'}
-    key.textContent = data.eng.row5[i];
+    key.textContent = data[selectLang.value].row5[i];
     keysRows[4].append(key);
 }
 
@@ -118,22 +145,6 @@ let arrayLeftKey = document.querySelector('.rray__key-left');
 let arrayDownKey = document.querySelector('.rray__key-down');
 let arrayRightKey = document.querySelector('.rray__key-right');
 
-
-// Local Storage
-
-window.addEventListener('beforeunload', setLocalStorage);
-getLocalStorage();
-
-function setLocalStorage() {
-    localStorage.setItem('language', selectLang.value);
-  }
-
-
-  function getLocalStorage() {
-    if (localStorage.getItem('language')) {
-      selectLang.value = localStorage.getItem('language');
-    }
-  }
 
 for (let i=0; i<keys.length; i++) {
     keys[i].setAttribute("keyname", keys[i].innerText);
@@ -227,7 +238,13 @@ keys.forEach(key => {
     })
 })
 
-function writeCharInTextBox (key, event) {
+function writeCharInTextBox (key) {
+    if (key.getAttribute('keyName') == 'Caps Lock') {
+        capsLockKey.addEventListener('click', () => {
+            text.textContent = text.textContent;
+            capsLockKey.classList.toggle('upper');
+        })
+    } else
     if (key.getAttribute('keyName') == 'Backspace') {
         text.textContent = (text.textContent).substring(0, (text.textContent).length-1)
     } else
@@ -247,14 +264,16 @@ function writeCharInTextBox (key, event) {
     } else
     if (key.getAttribute('keyName') == 'DEL') {
        text.textContent = (text.textContent).substring(0, (text.textContent).length-1)
-    } else
-    if (key.getAttribute('keyName') == 'Caps Lock') {
-        capsLockKey.addEventListener('click', (event) => {
-            event.code = 20;
-        })
     } else {
-        text.textContent += key.getAttribute('lowerCaseName');
+        if (capsLockKey.classList.contains('upper')) {
+            text.textContent += key.getAttribute('keyname');
+        } else {text.textContent += key.getAttribute('lowerCaseName');}
+
     }
 }
+
+
+
+
 
 
