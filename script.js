@@ -38,12 +38,7 @@ let keyBoardKeys = document.createElement('div');
 keyBoardKeys.className = 'keyboard__keys';
 keyBoardWrapper.append(keyBoardKeys);
 
-selectLang.addEventListener ('change', () => {
-    getKeys ();
-    text.focus();
-    getCharFromVirtualKeyboard ();
-    getCharFromKeyboard ();
-})
+
 
 
 // Local Storage
@@ -165,13 +160,18 @@ for (let i=0; i<keys.length; i++) {
 getCharFromKeyboard ();
 
 function getCharFromKeyboard () {
+    text.setAttribute('autofocus', 'autofocus');
     window.addEventListener('keydown', function (event) {
+        console.log(event.code)
         for (let i=0; i<keys.length; i++) {
             if (event.key == keys[i].getAttribute('keyname') || event.key == keys[i].getAttribute('lowerCaseName')) {
                 keys[i].classList.add('active');
             }
             if (event.code == 'Space') {
                 spaceKey.classList.add('active');
+            }
+            if (event.code == 'Delete') {
+                delKey.classList.add('active');
             }
             if (event.code == 'ArrowUp') {
                 arrayUpKey.classList.add('active');
@@ -191,17 +191,20 @@ function getCharFromKeyboard () {
             if (event.code == "ShiftRight") {
                 shiftKeyLeft.classList.remove('active');
             }
-            if (event.code == "AltLeft") {
+            if (event.code == 'AltLeft') {
                 altKeyRight.classList.remove('active');
             }
-            if (event.code == "AltRight") {
+            if (event.code == 'AltRight') {
                 altKeyLeft.classList.remove('active');
             }
-            if (event.code == "CtrlLeft") {
-                ctrlKeyRight.classList.remove('active');
+            if (event.code == 'ControlLeft') {
+                ctrlKeyLeft.classList.add('active');
             }
-            if (event.code == "CtrlRight") {
-                ctrlKeyLeft.classList.remove('active');
+            if (event.code == 'ControlRight') {
+                ctrlKeyRight.classList.add('active');
+            }
+            if (event.code == 'Enter') {
+                enterKey.classList.add('active');
             }
             if (event.code == 'CapsLock') {
                 capsLockKey.classList.toggle('active');
@@ -218,6 +221,10 @@ function getCharFromKeyboard () {
             if (event.code == 'Space') {
                 spaceKey.classList.remove('active');
                 spaceKey.classList.add('remove');
+            }
+            if (event.code == 'Delete') {
+                delKey.classList.remove('active');
+                delKey.classList.add('remove');
             }
             if (event.code == 'ArrowUp') {
                 arrayUpKey.classList.remove('active');
@@ -251,13 +258,17 @@ function getCharFromKeyboard () {
                 altKeyLeft.classList.remove('active');
                 altKeyLeft.classList.remove('remove');
             }
-            if (event.code == 'CtrlLeft') {
+            if (event.code == 'ControlRight') {
                 ctrlKeyRight.classList.remove('active');
-                ctrlKeyRight.classList.remove('remove');
+                ctrlKeyRight.classList.add('remove');
             }
-            if(event.code == 'CtrlRight') {
+            if(event.code == 'ControlLeft') {
                 ctrlKeyLeft.classList.remove('active');
-                ctrlKeyLeft.classList.remove('remove');
+                ctrlKeyLeft.classList.add('remove');
+            }
+            if(event.code == 'Enter') {
+                enterKey.classList.remove('active');
+                enterKey.classList.add('remove');
             }
             setTimeout(()=> {
                 keys[i].classList.remove('remove');
@@ -269,6 +280,7 @@ function getCharFromKeyboard () {
 getCharFromVirtualKeyboard ();
 
 function getCharFromVirtualKeyboard () {
+    text.setAttribute('autofocus', 'autofocus');
     keys.forEach(key => {
         key.addEventListener('mousedown', function () {
             key.classList.add('active');
@@ -319,7 +331,18 @@ function getCharFromVirtualKeyboard () {
 
 
 
+selectLang.addEventListener ('change', () => {
+    for (let i=0; i<keys.length; i++) {
+        keys[i].setAttribute("keyname", keys[i].innerText);
+        keys[i].setAttribute("lowerCaseName", keys[i].innerText.toLowerCase());
+    }
+    getKeys ();
+ 
+    getCharFromVirtualKeyboard ();
 
+   
+ 
+})
 
 
 
