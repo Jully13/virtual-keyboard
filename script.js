@@ -38,6 +38,13 @@ let keyBoardKeys = document.createElement('div');
 keyBoardKeys.className = 'keyboard__keys';
 keyBoardWrapper.append(keyBoardKeys);
 
+selectLang.addEventListener ('change', () => {
+    getKeys ();
+    text.focus();
+    getCharFromVirtualKeyboard ();
+    getCharFromKeyboard ();
+})
+
 
 // Local Storage
 
@@ -59,12 +66,7 @@ function getLocalStorage() {
   }
 }
 
-selectLang.addEventListener ('change', () => {
-    getKeys ();
-    text.focus();
-    getCharFromVirtualKeyboard ();
-    getCharFromKeyboard ();
-})
+
 
 getKeys ();
 
@@ -148,10 +150,10 @@ let altKeyLeft = document.querySelector('.alt__key-left');
 let altKeyRight = document.querySelector('.alt__key-right');
 let winKey = document.querySelector('.win__key');
 let spaceKey = document.querySelector('.space__key');
-let arrayUpKey = document.querySelector('.rray__key-up');
-let arrayLeftKey = document.querySelector('.rray__key-left');
-let arrayDownKey = document.querySelector('.rray__key-down');
-let arrayRightKey = document.querySelector('.rray__key-right');
+let arrayUpKey = document.querySelector('.array__key-up');
+let arrayLeftKey = document.querySelector('.array__key-left');
+let arrayDownKey = document.querySelector('.array__key-down');
+let arrayRightKey = document.querySelector('.array__key-right');
 
 
 for (let i=0; i<keys.length; i++) {
@@ -170,6 +172,18 @@ function getCharFromKeyboard () {
             }
             if (event.code == 'Space') {
                 spaceKey.classList.add('active');
+            }
+            if (event.code == 'ArrowUp') {
+                arrayUpKey.classList.add('active');
+            }
+            if (event.code == 'ArrowDown') {
+                arrayDownKey.classList.add('active');
+            }
+            if (event.code == 'ArrowLeft') {
+                arrayLeftKey.classList.add('active');
+            }
+            if (event.code == 'ArrowRight') {
+                arrayRightKey.classList.add('active');
             }
             if (event.code == "ShiftLeft") {
                 shiftKeyRight.classList.remove('active');
@@ -204,6 +218,22 @@ function getCharFromKeyboard () {
             if (event.code == 'Space') {
                 spaceKey.classList.remove('active');
                 spaceKey.classList.add('remove');
+            }
+            if (event.code == 'ArrowUp') {
+                arrayUpKey.classList.remove('active');
+                arrayUpKey.classList.add('remove');
+            }
+            if (event.code == 'ArrowDown') {
+                arrayDownKey.classList.remove('active');
+                arrayDownKey.classList.add('remove');
+            }
+            if (event.code == 'ArrowLeft') {
+                arrayLeftKey.classList.remove('active');
+                arrayLeftKey.classList.add('remove');
+            }
+            if (event.code == 'ArrowRight') {
+                arrayRightKey.classList.remove('active');
+                arrayRightKey.classList.add('remove');
             }
             if (event.code == 'ShiftLeft') {
                 shiftKeyRight.classList.remove('active');
