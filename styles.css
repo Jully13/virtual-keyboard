@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  transition: .2s;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0, 10px;
+}
+
+.language__wrapper {
+  margin: 0 0 60px 0;
+}
+
+.keyboard__weapper {
+  width: 100%;
+  max-width: 1050px;
+  background-color: #e7e7e7;
+  overflow: hidden;
+  position: relative;
+}
+
+.row {
+  display: flex;
+
+}
+
+.keys {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  margin: 4px;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.backspace__key,
+.caps-lock__key,
+.enter__key {
+  width: 160px;
+}
+
+.tab__key,
+.del__key {
+  width: 90px;
+}
+
+.shift__key-left {
+  width: 160px;
+}
+
+.space__key {
+  max-width: 500px;
+  width: 100%;
+}
+
+.text {
+  width: 1050px;
+  height: 150px;
+  font-size: 20px;
+  background-color: #f7f7f7;
+  outline: none;
+  border: none;
+  padding: 10px;
+  margin-bottom: 30px;
+  transition: .2s;
+  resize: none;
+}
+
+.keys.active {
+  background-color: #02404d;
+  color: #fff;
+}
+
+.keys.remove {
+  animation: keys_animation 0.5s forwards;
+}
+
+@keyframes keys_animation {
+  0% {
+    background-color: #02404d;
+    color: #fff;
+  }
+  100% {
+    background-color:  #fff;
+    color: #000;
+  }
+}
+
+.upper {
+  text-transform: uppercase;
+}
