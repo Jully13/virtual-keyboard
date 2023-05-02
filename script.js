@@ -170,6 +170,9 @@ function getCharFromKeyboard () {
             if (event.code == 'Space') {
                 spaceKey.classList.add('active');
             }
+            if (event.code == 'Tab') {
+                tabKey.classList.add('active');
+            }
             if (event.code == 'Delete') {
                 delKey.classList.add('active');
             }
@@ -221,6 +224,10 @@ function getCharFromKeyboard () {
             if (event.code == 'Space') {
                 spaceKey.classList.remove('active');
                 spaceKey.classList.add('remove');
+            }
+            if (event.code == 'Tab') {
+                tabKey.classList.remove('active');
+                tabKey.classList.add('remove');
             }
             if (event.code == 'Delete') {
                 delKey.classList.remove('active');
@@ -332,16 +339,12 @@ function getCharFromVirtualKeyboard () {
 
 
 selectLang.addEventListener ('change', () => {
-    for (let i=0; i<keys.length; i++) {
-        keys[i].setAttribute("keyname", keys[i].innerText);
-        keys[i].setAttribute("lowerCaseName", keys[i].innerText.toLowerCase());
-    }
     getKeys ();
- 
+
     getCharFromVirtualKeyboard ();
 
-   
- 
+    getCharFromKeyboard ();
+    writeCharInTextBox ();
 })
 
 
